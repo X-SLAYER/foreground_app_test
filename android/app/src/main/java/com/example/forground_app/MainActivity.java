@@ -21,7 +21,6 @@ public class MainActivity extends FlutterActivity {
 
     private static final String CHANNEL_TAG = "x.slayer/running_apps";
     public final int RESULT_ENABLE_ADMINISTARTIVE = -11;
-    public final int RESULT_NOT_OK = 01;
     static final int RESULT_ENABLE = -11;
     DevicePolicyManager deviceManger;
     ComponentName compName;
@@ -56,10 +55,6 @@ public class MainActivity extends FlutterActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d("SYSTEM ALERT",
-                "result code: " + resultCode + requestCode);
-
         switch (requestCode) {
             case RESULT_ENABLE_ADMINISTARTIVE:
                 if (resultCode == RESULT_ENABLE) {
@@ -69,6 +64,7 @@ public class MainActivity extends FlutterActivity {
                 }
                 break;
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void enableAccess() {

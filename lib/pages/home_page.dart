@@ -5,6 +5,7 @@ import 'dart:isolate';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
+import 'package:flutter_overlay_apps/flutter_overlay_apps.dart';
 import 'package:forground_app/pages/first_task_handler.dart';
 import 'package:system_alert_window/system_alert_window.dart';
 
@@ -109,6 +110,10 @@ class _HomePageState extends State<HomePage> {
         }
       });
       // initCamera();
+      FlutterOverlayApps.showOverlay(
+        height: 500,
+        alignment: OverlayAlignment.bottomCenter,
+      );
       return true;
     }
 

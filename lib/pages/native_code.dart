@@ -25,8 +25,8 @@ class _NativeChannelState extends State<NativeChannel> {
 
   Future<void> _enableAdministrative() async {
     try {
-      final list = await _methodeChannel.invokeMethod('enable');
-      log("Running apps:  $list");
+      final isEnabled = await _methodeChannel.invokeMethod('enable');
+      log("Enabled:  $isEnabled");
     } on PlatformException catch (error) {
       log("$error");
     }
@@ -34,8 +34,7 @@ class _NativeChannelState extends State<NativeChannel> {
 
   Future<void> _disable() async {
     try {
-      final list = await _methodeChannel.invokeMethod('disable');
-      log("Running apps:  $list");
+      await _methodeChannel.invokeMethod('disable');
     } on PlatformException catch (error) {
       log("$error");
     }

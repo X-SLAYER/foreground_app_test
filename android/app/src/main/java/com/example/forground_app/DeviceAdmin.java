@@ -3,7 +3,6 @@ package com.example.forground_app;
 import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.widget.Toast;
 
 public class DeviceAdmin extends DeviceAdminReceiver {

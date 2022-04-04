@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:isolate';
 
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:system_alert_window/system_alert_window.dart';
@@ -11,27 +10,11 @@ class FirstTaskHandler extends TaskHandler {
   int updateCount = 0;
   int counter = 0;
 
-  void initCamera() async {
-    final description = await availableCameras().then(
-      (cameras) => cameras.firstWhere(
-        (camera) => camera.lensDirection == CameraLensDirection.front,
-      ),
-    );
-    final _cameraController = CameraController(
-      description,
-      ResolutionPreset.low,
-      enableAudio: false,
-    );
-    await _cameraController.initialize();
-    await Future.delayed(const Duration(milliseconds: 500));
-    _cameraController.startImageStream((img) async {
-      log("Image captures: ${img.width} x ${img.height} -- ${img.format.raw}");
-    });
-  }
+  void startCameraStream() {}
 
   @override
   Future<void> onStart(DateTime timestamp, SendPort? sendPort) async {
-    initCamera();
+    startCameraStream();
   }
 
   @override

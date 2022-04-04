@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:forground_app/pages/native_code.dart';
+import 'package:forground_app/pages/home_page.dart';
+import 'package:forground_app/pages/overlay.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await CamController.initCamera();
   runApp(const MyApp());
+}
+
+// overlay entry point
+@pragma("vm:entry-point")
+void showOverlay() {
+  runApp(
+    const MaterialApp(
+      color: Colors.transparent,
+      debugShowCheckedModeBanner: false,
+      home: OverLayWidget(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const NativeChannel(),
+      home: const HomePage(),
     );
   }
 }
