@@ -4,6 +4,7 @@ import 'dart:isolate';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_accessibility_service/flutter_accessibility_service.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_overlay_apps/flutter_overlay_apps.dart';
 import 'package:forground_app/pages/first_task_handler.dart';
@@ -112,7 +113,7 @@ class _HomePageState extends State<HomePage> {
       // initCamera();
       FlutterOverlayApps.showOverlay(
         height: 500,
-        alignment: OverlayAlignment.bottomCenter,
+        alignment: OverlayAlignment.center,
       );
       return true;
     }
@@ -164,6 +165,9 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          _buildTestButton('requestPermission', onPressed: () async {
+            await FlutterAccessibilityService.requestAccessibilityPermission();
+          }),
           _buildTestButton('start', onPressed: _startForegroundTask),
           _buildTestButton('stop', onPressed: _stopForegroundTask),
           _buildTestButton('Open popout', onPressed: () {

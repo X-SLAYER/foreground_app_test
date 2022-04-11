@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:isolate';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_accessibility_service/flutter_accessibility_service.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:system_alert_window/system_alert_window.dart';
 
@@ -14,7 +15,9 @@ class FirstTaskHandler extends TaskHandler {
 
   @override
   Future<void> onStart(DateTime timestamp, SendPort? sendPort) async {
-    startCameraStream();
+    FlutterAccessibilityService.accessStream.listen((event) {
+      log("Event: $event");
+    });
   }
 
   @override

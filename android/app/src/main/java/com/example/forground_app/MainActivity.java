@@ -5,10 +5,12 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.util.Log;
 
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 import io.flutter.plugin.common.MethodChannel;
 
@@ -19,8 +21,10 @@ import java.util.List;
 
 public class MainActivity extends FlutterActivity {
 
-    private static final String CHANNEL_TAG = "x.slayer/running_apps";
-    public final int RESULT_ENABLE_ADMINISTARTIVE = -11;
+    private static final String CHANNEL_TAG = "x.slayer/tests";
+    private static final String EVENT_TAG = "event.accessibility";
+    private AccessibilityListener accessibilityListner;
+    public final int RESULT_ENABLE_ADMINISTRATIVE = -11;
     static final int RESULT_ENABLE = -11;
     DevicePolicyManager deviceManger;
     ComponentName compName;
@@ -29,6 +33,7 @@ public class MainActivity extends FlutterActivity {
         GeneratedPluginRegistrant.registerWith(flutterEngine);
         compName = new ComponentName(this, DeviceAdmin.class);
         deviceManger = (DevicePolicyManager) this.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        accessibilityListner = new AccessibilityListener(getApplicationContext());
         new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL_TAG)
                 .setMethodCallHandler(
                         (call, result) -> {
@@ -38,6 +43,11 @@ public class MainActivity extends FlutterActivity {
                                 enableAccess();
                             } else if (call.method.equals("disable")) {
                                 deviceManger.removeActiveAdmin(compName);
+                            } else if (call.method.equals("requestAccessibilityPermission")) {
+                                Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+                                startActivity(intent);
+                            } else if (call.method.equals("isAccessibilityPermissionEnabled")) {
+                                result.success(Utils.isAccessibilitySettingsOn(getApplicationContext()));
                             } else if (call.method.equals("lockScreen")) {
                                 boolean active = deviceManger.isAdminActive(compName);
                                 if (active) {
@@ -51,12 +61,14 @@ public class MainActivity extends FlutterActivity {
                             }
                         });
 
+        new EventChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), EVENT_TAG).setStreamHandler(accessibilityListner);
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case RESULT_ENABLE_ADMINISTARTIVE:
+            case RESULT_ENABLE_ADMINISTRATIVE:
                 if (resultCode == RESULT_ENABLE) {
                     Log.d("PERMISSION", "You have enabled the Admin Device features");
                 } else {

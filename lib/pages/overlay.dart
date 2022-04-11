@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_apps/flutter_overlay_apps.dart';
-import 'package:forground_app/pages/controller.dart';
 
 class OverLayWidget extends StatefulWidget {
   const OverLayWidget({Key? key}) : super(key: key);
@@ -12,23 +11,26 @@ class OverLayWidget extends StatefulWidget {
 }
 
 class _OverLayWidgetState extends State<OverLayWidget> {
+  int data = 0;
+
   @override
   void initState() {
     super.initState();
     FlutterOverlayApps.overlayListener().listen((event) {
       log("$event");
+      setState(() {
+        data = event['Count'];
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
       elevation: 0.0,
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.3,
-        width: MediaQuery.of(context).size.width,
-        child: Center(
+      color: Colors.white,
+      child: Center(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -37,6 +39,8 @@ class _OverLayWidgetState extends State<OverLayWidget> {
                 width: 120.0,
                 height: 120.0,
               ),
+              const SizedBox(height: 20.0),
+              Text("Data: $data"),
               const SizedBox(height: 20.0),
               TextButton(
                 onPressed: () {

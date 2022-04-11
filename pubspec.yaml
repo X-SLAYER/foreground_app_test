@@ -32,7 +32,7 @@ dependencies:
       url: https://github.com/flutter/plugins
       path: packages/camera/camera
       ref: 9e46048ad2e1f085c1e8f6c77391fa52025e681f
-  cupertino_icons: ^1.0.2
+  flutter_accessibility_service: ^0.0.1
   flutter:
     sdk: flutter
   flutter_background_service: ^1.0.4

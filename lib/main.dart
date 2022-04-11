@@ -13,7 +13,6 @@ Future<void> main() async {
 void showOverlay() {
   runApp(
     const MaterialApp(
-      color: Colors.transparent,
       debugShowCheckedModeBanner: false,
       home: OverLayWidget(),
     ),

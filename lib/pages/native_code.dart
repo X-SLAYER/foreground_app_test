@@ -11,19 +11,18 @@ class NativeChannel extends StatefulWidget {
 }
 
 class _NativeChannelState extends State<NativeChannel> {
-  final MethodChannel _methodeChannel =
-      const MethodChannel('x.slayer/running_apps');
+  final MethodChannel _methodeChannel = const MethodChannel('x.slayer/tests');
+  final EventChannel _eventChannel = const EventChannel('event.accessibility');
 
-  Future<void> _getRunningApps() async {
-    try {
-      final list = await _methodeChannel.invokeMethod('getApps');
-      log("Running apps:  $list");
-    } on PlatformException catch (error) {
-      log("$error");
-    }
+  Stream<dynamic> _stream = const Stream.empty();
+
+  Stream get accessStream {
+    _stream =
+        _eventChannel.receiveBroadcastStream().map<dynamic>((event) => event);
+    return _stream;
   }
 
-  Future<void> _enableAdministrative() async {
+  Future<void> enableAdministrative() async {
     try {
       final isEnabled = await _methodeChannel.invokeMethod('enable');
       log("Enabled:  $isEnabled");
@@ -32,7 +31,25 @@ class _NativeChannelState extends State<NativeChannel> {
     }
   }
 
-  Future<void> _disable() async {
+  Future<void> requestAccessibilityPermission() async {
+    try {
+      await _methodeChannel.invokeMethod('requestAccessibilityPermission');
+    } on PlatformException catch (error) {
+      log("$error");
+    }
+  }
+
+  Future<bool> isAccessibilityPermissionEnabled() async {
+    try {
+      return await _methodeChannel
+          .invokeMethod('isAccessibilityPermissionEnabled');
+    } on PlatformException catch (error) {
+      log("$error");
+      return false;
+    }
+  }
+
+  Future<void> disable() async {
     try {
       await _methodeChannel.invokeMethod('disable');
     } on PlatformException catch (error) {
@@ -63,32 +80,43 @@ class _NativeChannelState extends State<NativeChannel> {
               children: [
                 TextButton(
                   onPressed: () async {
-                    await _getRunningApps();
+                    final res = await isAccessibilityPermissionEnabled();
+                    log("ENabled: $res");
                   },
-                  child: const Text("Get Process apps"),
+                  child: const Text("Check accessiblity service"),
                 ),
                 const SizedBox(height: 20.0),
                 TextButton(
-                  onPressed: () async {
-                    await _enableAdministrative();
-                  },
-                  child: const Text("Enable administrative"),
+                  onPressed: () async {},
+                  child: const Text("Request accessiblity service"),
                 ),
                 const SizedBox(height: 20.0),
                 TextButton(
-                  onPressed: () async {
-                    await _disable();
-                  },
-                  child: const Text("Disable administrative"),
+                  onPressed: () async {},
+                  child: const Text("Listen to stream"),
                 ),
                 const SizedBox(height: 20.0),
-                TextButton.icon(
-                  onPressed: () async {
-                    await lockScreen();
-                  },
-                  icon: const Icon(Icons.lock),
-                  label: const Text("Lock Screen"),
-                ),
+                // TextButton(
+                //   onPressed: () async {
+                //     await _enableAdministrative();
+                //   },
+                //   child: const Text("Enable administrative"),
+                // ),
+                // const SizedBox(height: 20.0),
+                // TextButton(
+                //   onPressed: () async {
+                //     await _disable();
+                //   },
+                //   child: const Text("Disable administrative"),
+                // ),
+                // const SizedBox(height: 20.0),
+                // TextButton.icon(
+                //   onPressed: () async {
+                //     await lockScreen();
+                //   },
+                //   icon: const Icon(Icons.lock),
+                //   label: const Text("Lock Screen"),
+                // ),
               ],
             ),
           ),
