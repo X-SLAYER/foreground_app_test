@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
 
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 
@@ -21,27 +19,8 @@ Future<void> initializeService() async {
   );
 }
 
-void initCamera() async {
-  final description = await availableCameras().then(
-    (cameras) => cameras.firstWhere(
-      (camera) => camera.lensDirection == CameraLensDirection.front,
-    ),
-  );
-  final _cameraController = CameraController(
-    description,
-    ResolutionPreset.low,
-    enableAudio: false,
-  );
-  await _cameraController.initialize();
-  await Future.delayed(const Duration(milliseconds: 500));
-  _cameraController.startImageStream((img) async {
-    log("Image captures: ${img.width} x ${img.height} -- ${img.format.raw}");
-  });
-}
-
 void onStart() {
   WidgetsFlutterBinding.ensureInitialized();
-  initCamera();
 }
 
 class BackgroundService extends StatefulWidget {

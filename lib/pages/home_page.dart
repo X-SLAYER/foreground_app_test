@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:isolate';
 
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_accessibility_service/flutter_accessibility_service.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_overlay_apps/flutter_overlay_apps.dart';
 import 'package:forground_app/pages/first_task_handler.dart';
+import 'package:notification_listener_service/notification_listener_service.dart';
 import 'package:system_alert_window/system_alert_window.dart';
 
 // The callback function should always be a top-level function.
@@ -25,30 +25,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   ReceivePort? _receivePort;
-  CameraController? _cameraController;
-
-  void initCamera() async {
-    final description = await availableCameras().then(
-      (cameras) => cameras.firstWhere(
-        (camera) => camera.lensDirection == CameraLensDirection.front,
-      ),
-    );
-
-    log("${description.sensorOrientation} ${description.name}} CAMERA DESCRIPTION");
-
-    _cameraController = CameraController(
-      description,
-      ResolutionPreset.low,
-      enableAudio: false,
-    );
-    await _cameraController!.initialize();
-    await Future.delayed(const Duration(milliseconds: 500));
-    _cameraController!.startImageStream((img) async {
-      if (_cameraController != null) {
-        log("Image captures: ${img.width} x ${img.height} -- ${img.format.raw}");
-      }
-    });
-  }
 
   Future<void> _initForegroundTask() async {
     await FlutterForegroundTask.init(
@@ -122,7 +98,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<bool> _stopForegroundTask() async {
-    _cameraController?.dispose();
     SystemAlertWindow.closeSystemWindow();
     return await FlutterForegroundTask.stopService();
   }
@@ -131,6 +106,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _initForegroundTask();
+    NotificationListenerService.requestPermission();
   }
 
   @override

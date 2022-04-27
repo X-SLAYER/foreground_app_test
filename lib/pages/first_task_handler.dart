@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'dart:isolate';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_accessibility_service/flutter_accessibility_service.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
+import 'package:notification_listener_service/notification_listener_service.dart';
 import 'package:system_alert_window/system_alert_window.dart';
 
 class FirstTaskHandler extends TaskHandler {
@@ -15,8 +15,8 @@ class FirstTaskHandler extends TaskHandler {
 
   @override
   Future<void> onStart(DateTime timestamp, SendPort? sendPort) async {
-    FlutterAccessibilityService.accessStream.listen((event) {
-      log("Event: $event");
+    NotificationListenerService.notificationsStream.listen((event) {
+      log("Current notification: $event");
     });
   }
 

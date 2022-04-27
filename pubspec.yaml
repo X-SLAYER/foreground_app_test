@@ -27,11 +27,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  camera:
-    git:
-      url: https://github.com/flutter/plugins
-      path: packages/camera/camera
-      ref: 9e46048ad2e1f085c1e8f6c77391fa52025e681f
   flutter_accessibility_service: ^0.0.1
   flutter:
     sdk: flutter
@@ -39,8 +34,8 @@ dependencies:
   flutter_foreground_task: ^3.5.5
   system_alert_window: ^1.1.0+1
   flutter_app_version_checker: ^0.0.3
-  camerawesome: ^0.3.0+1
   flutter_overlay_apps: ^1.0.0
+  notification_listener_service: ^0.0.2
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to
