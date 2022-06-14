@@ -5,10 +5,9 @@ import 'dart:isolate';
 import 'package:flutter/material.dart';
 import 'package:flutter_accessibility_service/flutter_accessibility_service.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
-import 'package:flutter_overlay_apps/flutter_overlay_apps.dart';
+import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 import 'package:forground_app/pages/first_task_handler.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
-import 'package:system_alert_window/system_alert_window.dart';
 
 // The callback function should always be a top-level function.
 
@@ -60,7 +59,6 @@ class _HomePageState extends State<HomePage> {
 
   Future<bool> _startForegroundTask() async {
     // You can save data using the saveData function.
-    await initliszeSystemALert();
     await FlutterForegroundTask.saveData(key: 'customData', value: 'hello');
 
     ReceivePort? receivePort;
@@ -87,9 +85,12 @@ class _HomePageState extends State<HomePage> {
         }
       });
       // initCamera();
-      FlutterOverlayApps.showOverlay(
+      FlutterOverlayWindow.showOverlay(
         height: 500,
         alignment: OverlayAlignment.center,
+        enableDrag: true,
+        overlayTitle: "Hello",
+        overlayContent: "From the other side",
       );
       return true;
     }
@@ -98,7 +99,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<bool> _stopForegroundTask() async {
-    SystemAlertWindow.closeSystemWindow();
     return await FlutterForegroundTask.stopService();
   }
 
@@ -106,17 +106,13 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _initForegroundTask();
-    NotificationListenerService.requestPermission();
+    FlutterOverlayWindow.requestPermission();
   }
 
   @override
   void dispose() {
     _receivePort?.close();
     super.dispose();
-  }
-
-  Future<void> initliszeSystemALert() async {
-    await SystemAlertWindow.requestPermissions();
   }
 
   @override
@@ -146,24 +142,6 @@ class _HomePageState extends State<HomePage> {
           }),
           _buildTestButton('start', onPressed: _startForegroundTask),
           _buildTestButton('stop', onPressed: _stopForegroundTask),
-          _buildTestButton('Open popout', onPressed: () {
-            SystemAlertWindow.showSystemWindow(
-              height: 200,
-              header: header,
-              body: body,
-              footer: footer,
-              margin: SystemWindowMargin(
-                left: 8,
-                right: 8,
-                top: 100,
-                bottom: 0,
-              ),
-              gravity: SystemWindowGravity.BOTTOM,
-              notificationTitle: "Hello",
-              notificationBody: "How are you",
-              prefMode: SystemWindowPrefMode.DEFAULT,
-            );
-          }),
         ],
       ),
     );

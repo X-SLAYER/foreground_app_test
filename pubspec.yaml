@@ -27,22 +27,15 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  flutter_accessibility_service: ^0.0.1
   flutter:
     sdk: flutter
-  flutter_background_service: ^1.0.4
-  flutter_foreground_task: ^3.5.5
-  system_alert_window: ^1.1.0+1
-  flutter_app_version_checker: ^0.0.3
-  flutter_overlay_apps: ^1.0.0
-  notification_listener_service: ^0.0.2
+  flutter_accessibility_service: ^0.2.1
+  flutter_app_version_checker: any
+  flutter_foreground_task: ^3.7.3
+  flutter_overlay_window: ^0.2.9
+  notification_listener_service: ^0.3.1
 
 dev_dependencies:
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter

@@ -15,36 +15,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  camera:
-    dependency: "direct main"
-    description:
-      path: "packages/camera/camera"
-      ref: "9e46048ad2e1f085c1e8f6c77391fa52025e681f"
-      resolved-ref: "9e46048ad2e1f085c1e8f6c77391fa52025e681f"
-      url: "https://github.com/flutter/plugins"
-    source: git
-    version: "0.9.4+2"
-  camera_platform_interface:
-    dependency: transitive
-    description:
-      name: camera_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.5"
-  camera_web:
-    dependency: transitive
-    description:
-      name: camera_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.1+3"
-  camerawesome:
-    dependency: "direct main"
-    description:
-      name: camerawesome
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0+1"
   characters:
     dependency: transitive
     description:
@@ -72,21 +42,14 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.15.0"
-  cross_file:
-    dependency: transitive
-    description:
-      name: cross_file
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.2"
+    version: "1.16.0"
   fake_async:
     dependency: transitive
     description:
       name: fake_async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.3.0"
   ffi:
     dependency: transitive
     description:
@@ -112,7 +75,7 @@ packages:
       name: flutter_accessibility_service
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "0.2.1"
   flutter_app_version_checker:
     dependency: "direct main"
     description:
@@ -120,41 +83,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.3"
-  flutter_background_service:
-    dependency: "direct main"
-    description:
-      name: flutter_background_service
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.4"
-  flutter_background_service_android:
-    dependency: transitive
-    description:
-      name: flutter_background_service_android
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
-  flutter_background_service_ios:
-    dependency: transitive
-    description:
-      name: flutter_background_service_ios
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
-  flutter_background_service_platform_interface:
-    dependency: transitive
-    description:
-      name: flutter_background_service_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
   flutter_foreground_task:
     dependency: "direct main"
     description:
       name: flutter_foreground_task
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.5.5"
+    version: "3.7.3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -162,20 +97,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  flutter_overlay_apps:
+  flutter_overlay_window:
     dependency: "direct main"
     description:
-      name: flutter_overlay_apps
+      name: flutter_overlay_window
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
-  flutter_plugin_android_lifecycle:
-    dependency: transitive
-    description:
-      name: flutter_plugin_android_lifecycle
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.5"
+    version: "0.2.9"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -206,7 +134,7 @@ packages:
       name: js
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.3"
+    version: "0.6.4"
   lints:
     dependency: transitive
     description:
@@ -227,7 +155,7 @@ packages:
       name: material_color_utilities
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.3"
+    version: "0.1.4"
   meta:
     dependency: transitive
     description:
@@ -241,7 +169,7 @@ packages:
       name: notification_listener_service
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2"
+    version: "0.3.1"
   package_info_plus:
     dependency: transitive
     description:
@@ -290,7 +218,7 @@ packages:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.8.1"
   path_provider_linux:
     dependency: transitive
     description:
@@ -312,13 +240,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
-  pedantic:
-    dependency: transitive
-    description:
-      name: pedantic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.11.1"
   platform:
     dependency: transitive
     description:
@@ -340,20 +261,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
-  quiver:
-    dependency: transitive
-    description:
-      name: quiver
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.1+1"
-  rxdart:
-    dependency: transitive
-    description:
-      name: rxdart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.27.3"
   shared_preferences:
     dependency: transitive
     description:
@@ -421,7 +328,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.1"
+    version: "1.8.2"
   stack_trace:
     dependency: transitive
     description:
@@ -436,13 +343,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  stream_transform:
-    dependency: transitive
-    description:
-      name: stream_transform
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   string_scanner:
     dependency: transitive
     description:
@@ -450,13 +350,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  system_alert_window:
-    dependency: "direct main"
-    description:
-      name: system_alert_window
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.0+1"
   term_glyph:
     dependency: transitive
     description:
@@ -470,7 +363,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.8"
+    version: "0.4.9"
   typed_data:
     dependency: transitive
     description:
@@ -484,7 +377,7 @@ packages:
       name: vector_math
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   win32:
     dependency: transitive
     description:
@@ -500,5 +393,5 @@ packages:
     source: hosted
     version: "0.2.0+1"
 sdks:
-  dart: ">=2.16.2 <3.0.0"
-  flutter: ">=2.8.0"
+  dart: ">=2.17.0-0 <3.0.0"
+  flutter: ">=2.8.1"

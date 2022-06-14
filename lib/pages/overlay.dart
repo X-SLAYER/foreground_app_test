@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_overlay_apps/flutter_overlay_apps.dart';
+import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 
 class OverLayWidget extends StatefulWidget {
   const OverLayWidget({Key? key}) : super(key: key);
@@ -16,11 +16,8 @@ class _OverLayWidgetState extends State<OverLayWidget> {
   @override
   void initState() {
     super.initState();
-    FlutterOverlayApps.overlayListener().listen((event) {
+    FlutterOverlayWindow.overlayListener.listen((event) {
       log("$event");
-      setState(() {
-        data = event['Count'];
-      });
     });
   }
 
@@ -42,12 +39,6 @@ class _OverLayWidgetState extends State<OverLayWidget> {
               const SizedBox(height: 20.0),
               Text("Data: $data"),
               const SizedBox(height: 20.0),
-              TextButton(
-                onPressed: () {
-                  FlutterOverlayApps.closeOverlay();
-                },
-                child: const Text("Close me"),
-              ),
             ],
           ),
         ),
