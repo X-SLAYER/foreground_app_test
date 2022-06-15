@@ -85,13 +85,13 @@ class _HomePageState extends State<HomePage> {
         }
       });
       // initCamera();
-      FlutterOverlayWindow.showOverlay(
-        height: 500,
-        alignment: OverlayAlignment.center,
-        enableDrag: true,
-        overlayTitle: "Hello",
-        overlayContent: "From the other side",
-      );
+      // FlutterOverlayWindow.showOverlay(
+      //   height: 500,
+      //   alignment: OverlayAlignment.center,
+      //   enableDrag: true,
+      //   overlayTitle: "Hello",
+      //   overlayContent: "From the other side",
+      // );
       return true;
     }
 

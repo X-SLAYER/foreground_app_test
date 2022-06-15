@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'dart:isolate';
 
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
-import 'package:notification_listener_service/notification_listener_service.dart';
+import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 
 class FirstTaskHandler extends TaskHandler {
   int updateCount = 0;
@@ -13,8 +13,19 @@ class FirstTaskHandler extends TaskHandler {
 
   @override
   Future<void> onStart(DateTime timestamp, SendPort? sendPort) async {
-    NotificationListenerService.notificationsStream.listen((event) {
-      log("Current notification: $event");
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      counter++;
+      log("Counter: $counter");
+      if (counter >= 5) {
+        timer.cancel();
+        FlutterOverlayWindow.showOverlay(
+          height: 500,
+          alignment: OverlayAlignment.center,
+          enableDrag: true,
+          overlayTitle: "Hello",
+          overlayContent: "From the background",
+        );
+      }
     });
   }
 
